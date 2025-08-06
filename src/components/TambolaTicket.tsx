@@ -7,6 +7,10 @@ interface TambolaTicketProps {
   ticketNumber: number;
 }
 
+interface MarkedNumbers {
+  [key: string]: boolean; // key format: "row-col"
+}
+
 // Generate a valid Tambola ticket with rules
 const generateTambolaTicket = (): (number | null)[][] => {
   const ticket: (number | null)[][] = Array(3).fill(null).map(() => Array(9).fill(null));
@@ -61,32 +65,79 @@ const generateTambolaTicket = (): (number | null)[][] => {
 };
 
 const TambolaTicket: React.FC<TambolaTicketProps> = ({ ticketData, ticketNumber }) => {
+  const [markedNumbers, setMarkedNumbers] = useState<MarkedNumbers>({});
+
+  const toggleNumber = (rowIndex: number, colIndex: number, number: number) => {
+    const key = `${rowIndex}-${colIndex}`;
+    setMarkedNumbers(prev => ({
+      ...prev,
+      [key]: !prev[key]
+    }));
+  };
+
+  const isMarked = (rowIndex: number, colIndex: number) => {
+    return markedNumbers[`${rowIndex}-${colIndex}`] || false;
+  };
+
   return (
     <Card className="p-6 bg-card shadow-card border-2 border-primary/20 hover:shadow-glow transition-all duration-300 animate-bounce-in">
       <div className="text-center mb-4">
         <h3 className="text-lg font-bold text-foreground">Ticket #{ticketNumber}</h3>
+        <p className="text-xs text-muted-foreground">Click numbers to mark them</p>
       </div>
       
       <div className="grid grid-cols-9 gap-1 bg-gradient-primary p-4 rounded-lg">
         {ticketData.map((row, rowIndex) =>
-          row.map((cell, colIndex) => (
-            <div
-              key={`${rowIndex}-${colIndex}`}
-              className={`
-                aspect-square flex items-center justify-center rounded-md font-bold text-sm
-                transition-all duration-300 hover:scale-110
-                ${cell !== null 
-                  ? 'bg-card text-foreground shadow-md hover:shadow-lg border border-primary/20' 
-                  : 'bg-muted/30'
-                }
-              `}
-            >
-              {cell && (
-                <span className="animate-fade-in">{cell}</span>
-              )}
-            </div>
-          ))
+          row.map((cell, colIndex) => {
+            const marked = isMarked(rowIndex, colIndex);
+            return (
+              <div
+                key={`${rowIndex}-${colIndex}`}
+                onClick={() => cell !== null && toggleNumber(rowIndex, colIndex, cell)}
+                className={`
+                  aspect-square flex items-center justify-center rounded-md font-bold text-sm
+                  transition-all duration-300 relative cursor-pointer
+                  ${cell !== null 
+                    ? `bg-card border border-primary/20 hover:scale-110 hover:shadow-lg
+                       ${marked 
+                         ? 'bg-success/20 text-success-foreground border-success' 
+                         : 'text-foreground hover:bg-accent/10'
+                       }` 
+                    : 'bg-muted/30 cursor-default'
+                  }
+                `}
+              >
+                {cell && (
+                  <>
+                    <span className={`animate-fade-in ${marked ? 'opacity-60' : ''}`}>
+                      {cell}
+                    </span>
+                    {marked && (
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="w-full h-0.5 bg-success rotate-45 absolute"></div>
+                        <div className="w-full h-0.5 bg-success -rotate-45 absolute"></div>
+                        <div className="text-success text-lg font-bold animate-bounce-in">✓</div>
+                      </div>
+                    )}
+                  </>
+                )}
+              </div>
+            );
+          })
         )}
+      </div>
+      
+      {/* Progress indicator */}
+      <div className="mt-4 text-center">
+        <div className="text-xs text-muted-foreground">
+          {Object.values(markedNumbers).filter(Boolean).length} / 15 numbers marked
+        </div>
+        <div className="w-full bg-muted rounded-full h-1 mt-2">
+          <div 
+            className="bg-gradient-success h-1 rounded-full transition-all duration-500"
+            style={{ width: `${(Object.values(markedNumbers).filter(Boolean).length / 15) * 100}%` }}
+          ></div>
+        </div>
       </div>
     </Card>
   );
