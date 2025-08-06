@@ -22,7 +22,7 @@ const Index = () => {
         {/* Header */}
         <div className="text-center mb-8 animate-fade-in">
           <h1 className="text-4xl md:text-6xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-4">
-            🎯 TAMBOLA MASTER
+            🎯 TAMBOLA MASTER GAME
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Generate authentic Tambola tickets and enjoy the classic Indian Bingo experience!
