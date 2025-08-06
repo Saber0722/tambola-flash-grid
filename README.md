@@ -1,73 +1,133 @@
-# Welcome to your Lovable project
+# Tambola Flash Grid 🎲
 
-## Project info
+A dynamic web-based Tambola (Housie) game featuring animated ticket generation and live number calling.
+Built with **React**, styled using **Tailwind CSS**, and offering a **theme switcher** for light/dark modes.
 
-**URL**: https://lovable.dev/projects/09f45368-ced8-44a3-a541-cec794287129
+---
 
-## How can I edit this code?
+## Features
 
-There are several ways of editing your application.
+* Generate multiple Tambola tickets with animated fade-in / grid effects
+* Automatic number draw with lively call-out animations
+* Track and highlight winning patterns: *Early Five*, *Top Row*, *Full House*, etc.
+* Light and dark theme toggle, persisted across sessions
+* Mobile-responsive and accessible UI
 
-**Use Lovable**
+---
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/09f45368-ced8-44a3-a541-cec794287129) and start prompting.
+## 🧩 Tech Stack
 
-Changes made via Lovable will be committed automatically to this repo.
+* **Frontend**: React, Tailwind CSS
+* **State & Animations**: React Context / Hooks, GSAP or Framer Motion (if used)
+* **Styling**: Utility-first styling with Tailwind
+* **Theme Toggle**: Switch between light and dark modes
+* **Optional Backend**: (if present) Node.js / Express / WebSocket
 
-**Use your preferred IDE**
+---
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## 📁 Project Structure
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```
+├── public/
+│   ├── index.html
+│   └── ...
+├── src/
+│   ├── components/
+│   │   ├── GameStats.tsx
+│   │   ├── NumberPicker.tsx
+│   │   └── TambolaTicket.tsx
+│   ├── context/
+│   │   └── ThemeContext.tsx
+│   ├── hooks/
+│   │   └── useNumberDraw.js
+│   ├── styles/
+│   │   └── tailwind.css
+│   ├── App.jsx
+│   └── index.jsx
+├── tailwind.config.js
+├── package.json
+└── README.md
 ```
 
-**Edit a file directly in GitHub**
+> Adjust this structure to match your actual project layout.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+---
 
-**Use GitHub Codespaces**
+## ⚙️ Installation
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Clone the repository:
 
-## What technologies are used for this project?
+```bash
+git clone https://github.com/Saber0722/tambola-flash-grid.git
+cd tambola-flash-grid
+```
 
-This project is built with:
+Install dependencies:
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+```bash
+npm install
+# or
+yarn install
+```
 
-## How can I deploy this project?
+Start the development server:
 
-Simply open [Lovable](https://lovable.dev/projects/09f45368-ced8-44a3-a541-cec794287129) and click on Share -> Publish.
+```bash
+npm start
+# or
+yarn start
+```
 
-## Can I connect a custom domain to my Lovable project?
+The app will be live at `http://localhost:3000`.
 
-Yes, you can!
+---
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## 🎮 Usage Guide
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+1. **Launch the App**: Open it in your browser.
+2. **Select Tickets**: Generate or customize tickets.
+3. **Start Calling Numbers**: The system auto-draws and displays numbers with animations.
+4. **View Updates**: Ticket marks and winning patterns (e.g. Early Five, Full House) highlight in real time.
+5. **Toggle Theme**: Use the theme switcher to change between light and dark modes.
+
+---
+
+## 🏆 Win Patterns (Typical Tambola Rules)
+
+* **Early Five**: Player marks any five numbers first
+* **Top Row**: Complete the first horizontal row
+* **Middle Row**: Complete the second row
+* **Bottom Row**: Complete the third row
+* **Full House**: All fifteen numbers marked
+
+---
+
+## ✏️ Customization & Configuration
+
+* **Ticket Count**: Set number of tickets generated at startup
+* **Draw Interval**: Modify the timer or speed of number calls
+* **Styling**: Customize Tailwind theme, colors, and animations
+* **Theme Persistence**: Stores current theme in localStorage/sessionStorage
+
+---
+
+## 🧪 Contributing
+
+Contributions are welcome! Please follow these steps:
+
+1. Fork the repo
+2. Create a feature branch: `git checkout -b feature-name`
+3. Make your improvements / fixes
+4. Commit: `git commit -m "Your description"`
+5. Push: `git push origin feature-name`
+6. Open a Pull Request
+
+---
+
+## 💬 Contact & Support
+
+If you encounter any issues or have feature ideas, feel free to open an issue or reach out at your preferred contact.
+
+---
+[3]: https://github.com/kashish-jain/Tambola?utm_source=chatgpt.com "An online multiplayer Tambola/Housie game. - GitHub"
+[4]: https://github.com/sidaudhi/tambola-generator?utm_source=chatgpt.com "A library for generating tambola tickets and calling the draw - GitHub"
