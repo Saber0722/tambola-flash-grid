@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import TambolaTicketGenerator from '@/components/TambolaTicket';
 import NumberPicker from '@/components/NumberPicker';
 import GameStats from '@/components/GameStats';
@@ -22,11 +21,11 @@ const Index = () => {
       <div className="relative z-10 container mx-auto px-4 py-8">
         {/* Header */}
         <div className="text-center mb-8 animate-fade-in">
-          <h1 className="text-5xl md:text-7xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-4">
+          <h1 className="text-4xl md:text-6xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-4">
             🎯 TAMBOLA MASTER
           </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Generate authentic Tambola tickets and enjoy the classic Indian Bingo experience with stunning animations!
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Generate authentic Tambola tickets and enjoy the classic Indian Bingo experience!
           </p>
         </div>
 
@@ -39,34 +38,49 @@ const Index = () => {
           />
         </div>
 
-        {/* Main Game Area */}
-        <Tabs defaultValue="generator" className="w-full animate-fade-in">
-          <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 mb-8 bg-card shadow-card border border-border">
-            <TabsTrigger 
-              value="generator" 
-              className="data-[state=active]:bg-gradient-primary data-[state=active]:text-primary-foreground transition-all duration-300"
-            >
-              🎫 Ticket Generator
-            </TabsTrigger>
-            <TabsTrigger 
-              value="picker" 
-              className="data-[state=active]:bg-gradient-accent data-[state=active]:text-accent-foreground transition-all duration-300"
-            >
-              🎱 Number Picker
-            </TabsTrigger>
-          </TabsList>
+        {/* Main Game Layout - Two Column Layout for Desktop */}
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 animate-fade-in">
+          {/* Left Column - Number Picker */}
+          <div className="order-2 xl:order-1">
+            <div className="sticky top-4">
+              <NumberPicker />
+            </div>
+          </div>
 
-          <TabsContent value="generator" className="space-y-6">
+          {/* Right Column - Ticket Generator */}
+          <div className="order-1 xl:order-2">
             <TambolaTicketGenerator />
-          </TabsContent>
+          </div>
+        </div>
 
-          <TabsContent value="picker" className="space-y-6">
-            <NumberPicker />
-          </TabsContent>
-        </Tabs>
+        {/* How to Play Instructions */}
+        <div className="mt-16 max-w-4xl mx-auto animate-fade-in">
+          <div className="bg-card/50 backdrop-blur-sm rounded-2xl p-6 border border-primary/20 shadow-card">
+            <h3 className="text-xl font-bold text-center mb-4 text-foreground">
+              🎮 How to Play Tambola
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm text-muted-foreground">
+              <div className="text-center space-y-2">
+                <div className="text-2xl">📋</div>
+                <div className="font-semibold text-foreground">Step 1: Generate Tickets</div>
+                <div>Create 1-6 authentic Tambola tickets with proper number distribution</div>
+              </div>
+              <div className="text-center space-y-2">
+                <div className="text-2xl">🎲</div>
+                <div className="font-semibold text-foreground">Step 2: Start Calling</div>
+                <div>Use the number picker to randomly call numbers from 1-90</div>
+              </div>
+              <div className="text-center space-y-2">
+                <div className="text-2xl">🏆</div>
+                <div className="font-semibold text-foreground">Step 3: Mark & Win</div>
+                <div>Mark called numbers on your tickets and claim wins (Early 5, Lines, Full House)</div>
+              </div>
+            </div>
+          </div>
+        </div>
 
         {/* Footer */}
-        <div className="text-center mt-16 text-muted-foreground animate-fade-in">
+        <div className="text-center mt-12 text-muted-foreground animate-fade-in">
           <p className="text-sm">
             🎮 Built with React & Tailwind CSS • Featuring authentic Tambola rules and beautiful animations
           </p>
